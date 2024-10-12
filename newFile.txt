@@ -1,0 +1,73 @@
+#pragma once
+#include <iostream>
+using namespace std;
+
+class ParkingMeter;
+class ParkedCar;
+class ParkingTicket;
+class PoliceOfficer;
+
+
+class ParkedCar
+{
+private:
+	string mark;
+	string model;
+	string colour;
+	string licenseNumber;
+	unsigned int minutesParked;
+	friend class ParkingTicket;
+	friend class PoliceOfficer;
+public:
+	ParkedCar(string mark, string model, string colour, string licenseNumber, unsigned int minutesParked);
+	string getMark() const;
+	string getModel() const;
+	string getColour() const;
+	string getLicenseNumber() const;
+	int getMinutesParked() const;
+
+};
+
+class ParkingMeter
+{
+private:
+	unsigned int purchased;
+	friend class ParkingTicket;
+	friend class PoliceOfficer;
+public:
+	ParkingMeter(unsigned int purchased);
+	int getPurchased() const;
+};
+
+class ParkingTicket
+{
+private:
+	int fine;
+	string Name;
+	string badge;
+	string carMark;
+	string carModel;
+	string carColour;
+	string carLicenseNumber;
+	unsigned int minutesParked;
+	friend class PoliceOfficer;
+	int calcFine(const ParkedCar& car, const ParkingMeter& purchased);
+public:
+	void ShowTicket(const ParkedCar& car) const;
+
+
+};
+
+class PoliceOfficer
+{
+private:
+	string officerName;
+	string badgeNumber;
+	friend class ParkingTicket;
+public:
+	PoliceOfficer(string officerName, string badgeNumber);
+	string getOfficerName() const;
+	string getBadgeNumber() const;
+	
+	ParkingTicket CheckCar(const ParkedCar& car, const ParkingMeter& purchased);
+};
