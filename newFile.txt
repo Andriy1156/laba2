@@ -8,7 +8,7 @@ class ParkingTicket;
 class PoliceOfficer;
 
 
-class ParkedCar
+
 {
 private:
 	string mark;
